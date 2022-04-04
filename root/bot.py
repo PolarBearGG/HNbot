@@ -2,20 +2,20 @@ import requests
 import urllib
 
 
-TOKEN = "5183911411:AAGl7yMmUE5Soj1G-ztDBd4YCyTXjkrET2o"
-URL = "https://api.telegram.org/bot{}/".format(TOKEN)
-USERNAME_BOT = "Python_HN_bot"
+class Bot:
 
+    def __init__(self, token, username_bot, chat_id) -> None:
+        self.token = token
+        self.username_bot = username_bot
+        self.chat_id = chat_id
+        self.url = f'https://api.telegram.org/bot{token}/'
 
-def get_url(url):
-    response = requests.get(url)
-    content = response.content.decode("utf8")
-    return content
+    def get_url(self, url):
+        self.response = requests.get(url)
+        self.content = self.response.content.decode("utf8")
+        return self.content
 
-
-def send_message(text, chat_id, parse_mode):
-    tot = urllib.parse.quote_plus(text)
-    url = URL + \
-        "sendMessage?text={}&chat_id={}&parse_mode={}".format(
-            tot, chat_id, parse_mode)
-    get_url(url)
+    def send_message(self, text, parse_mode):
+        tot = urllib.parse.quote_plus(text)
+        url = f'{self.url}sendMessage?text={tot}&chat_id={self.chat_id}&parse_mode={parse_mode}'
+        self.get_url(url)
