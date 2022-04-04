@@ -6,7 +6,8 @@ class Parser:
 
     def __init__(self) -> None:
         self.stories_id_url = 'https://hacker-news.firebaseio.com/v0/newstories.json'
-        self.conn = sqlite3.connect('pythonStories.sqlite')
+        self.conn = sqlite3.connect(
+            '/home/korolyktv/HNbot/root/pythonStories.sqlite')
 
     def createDB(self):
         c = self.conn.cursor()
