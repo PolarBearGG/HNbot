@@ -3,7 +3,7 @@ from parser import Parser
 
 p = Parser()
 p.createDB()
-# p.saveNewStories()
+p.saveNewStories()
 df = p.getStory()
 
 id = df["id"][0]
