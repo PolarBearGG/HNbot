@@ -4,7 +4,7 @@ import sqlite3
 
 def getStory():
     conn = sqlite3.connect(
-        'pythonStories.sqlite')
+        '/home/korolyktv/HNbot/root/pythonStories.sqlite')
     c = conn.cursor()
 
     c.execute('''
@@ -29,7 +29,7 @@ def getStory():
 
     df_new_top500_from_HN = pd.read_json(
         'https://hacker-news.firebaseio.com/v0/newstories.json')
-    history = pd.read_sql("select * from history", conn)
+    history = pd.read_sql('select * from history', conn)
     for i, id in enumerate(df_new_top500_from_HN[0]):
         df_story_details_from_HN = pd.read_json(
             f'https://hacker-news.firebaseio.com/v0/item/{id}.json', orient='index').T
@@ -44,9 +44,9 @@ def getStory():
 
 def rememberStoryId():
     conn = sqlite3.connect(
-        'pythonStories.sqlite')
+        '/home/korolyktv/HNbot/root/pythonStories.sqlite')
     df = pd.read_sql('select * from stories limit 1', conn)
     c = conn.cursor()
-    c.execute("INSERT INTO history VALUES (?)", (int(df['id'][0]),))
-    c.execute("DELETE FROM stories WHERE id = (?)", (int(df['id'][0]),))
+    c.execute('INSERT INTO history VALUES (?)', (int(df['id'][0]),))
+    c.execute('DELETE FROM stories WHERE id = (?)', (int(df['id'][0]),))
     conn.commit()

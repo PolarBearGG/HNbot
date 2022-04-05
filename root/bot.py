@@ -12,7 +12,7 @@ class Bot:
 
     def get_url(self, url):
         self.response = requests.get(url)
-        self.content = self.response.content.decode("utf8")
+        self.content = self.response.content.decode('utf8')
         return self.content
 
     def send_message(self, text, parse_mode):
